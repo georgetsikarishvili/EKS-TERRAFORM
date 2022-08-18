@@ -23,7 +23,7 @@ resource "aws_subnet" "private-eu-central-1b" {
 }
 
 resource "aws_subnet" "public-eu-central-1a" {
-  vpc_id                  = aws_vpc.main.id
+  vpc_id                  = aws_vpc.EKS.id
   cidr_block              = "172.27.3.0/24"
   availability_zone       = "eu-central-1a"
   map_public_ip_on_launch = true
@@ -36,7 +36,7 @@ resource "aws_subnet" "public-eu-central-1a" {
 }
 
 resource "aws_subnet" "public-eu-central-1b" {
-  vpc_id                  = aws_vpc.main.id
+  vpc_id                  = aws_vpc.EKS.id
   cidr_block              = "172.27.4.0/24"
   availability_zone       = "eu-central-1b"
   map_public_ip_on_launch = true

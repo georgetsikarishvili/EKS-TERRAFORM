@@ -25,7 +25,7 @@ resource "aws_route_table" "EKS-private" {
 }
 
 resource "aws_route_table" "EKS-public" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.EKS.id
 
   route = [
     {
