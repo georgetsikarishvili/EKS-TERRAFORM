@@ -1,10 +1,10 @@
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.main.id
+resource "aws_route_table" "EKS-private" {
+  vpc_id = aws_vpc.EKS.id
 
   route = [
     {
       cidr_block                 = "0.0.0.0/0"
-      nat_gateway_id             = aws_nat_gateway.nat.id
+      nat_gateway_id             = aws_nat_gateway.EKS-nat.id
       carrier_gateway_id         = ""
       destination_prefix_list_id = ""
       egress_only_gateway_id     = ""
@@ -20,17 +20,17 @@ resource "aws_route_table" "private" {
   ]
 
   tags = {
-    Name = "private"
+    Name = "EKS-private"
   }
 }
 
-resource "aws_route_table" "public" {
+resource "aws_route_table" "EKS-public" {
   vpc_id = aws_vpc.main.id
 
   route = [
     {
       cidr_block                 = "0.0.0.0/0"
-      gateway_id                 = aws_internet_gateway.igw.id
+      gateway_id                 = aws_internet_gateway.EKS-igw.id
       nat_gateway_id             = ""
       carrier_gateway_id         = ""
       destination_prefix_list_id = ""
@@ -46,26 +46,26 @@ resource "aws_route_table" "public" {
   ]
 
   tags = {
-    Name = "public"
+    Name = "EKS-public"
   }
 }
 
-resource "aws_route_table_association" "private-us-east-1a" {
-  subnet_id      = aws_subnet.private-us-east-1a.id
-  route_table_id = aws_route_table.private.id
+resource "aws_route_table_association" "private-eu-central-1a" {
+  subnet_id      = aws_subnet.private-eu-central-1a.id
+  route_table_id = aws_route_table.EKS-private.id
 }
 
-resource "aws_route_table_association" "private-us-east-1b" {
-  subnet_id      = aws_subnet.private-us-east-1b.id
-  route_table_id = aws_route_table.private.id
+resource "aws_route_table_association" "private-eu-central-1b" {
+  subnet_id      = aws_subnet.private-eu-central-1b.id
+  route_table_id = aws_route_table.EKS-private.id
 }
 
-resource "aws_route_table_association" "public-us-east-1a" {
-  subnet_id      = aws_subnet.public-us-east-1a.id
-  route_table_id = aws_route_table.public.id
+resource "aws_route_table_association" "public-eu-central-1a" {
+  subnet_id      = aws_subnet.public-eu-central-1a.id
+  route_table_id = aws_route_table.EKS-public.id
 }
 
-resource "aws_route_table_association" "public-us-east-1b" {
-  subnet_id      = aws_subnet.public-us-east-1b.id
-  route_table_id = aws_route_table.public.id
+resource "aws_route_table_association" "public-eu-central-1b" {
+  subnet_id      = aws_subnet.public-eu-central-1b.id
+  route_table_id = aws_route_table.EKS-public.id
 }
