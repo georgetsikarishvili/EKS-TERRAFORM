@@ -1,1 +1,6 @@
 test
+
+
+
+eks_cluster_autoscaler_arn = "arn:aws:iam::293787744451:role/eks-cluster-autoscaler"
+test_policy_arn = "arn:aws:iam::293787744451:role/test-oidc"
